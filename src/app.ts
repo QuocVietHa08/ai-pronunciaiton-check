@@ -13,6 +13,10 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use('/api', routes);
 
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome to Korean Pronunciation Analysis API. Create post request to /api/analyze-pronunciation to test the feature' });
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', message: 'Korean Pronunciation Analysis API is running' });
