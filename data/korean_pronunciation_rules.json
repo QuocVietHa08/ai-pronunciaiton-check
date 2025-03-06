@@ -1,0 +1,76 @@
+{
+  "rules": [
+    {
+      "name": "ㅎ Liaison (Aspiration)",
+      "description": "When ㅎ (h) appears at the end of a syllable and the next syllable begins with a vowel, the ㅎ is transferred to the beginning of the next syllable. This changes the pronunciation of words like '좋은' (jo-eun) to sound like '조은' (jo-eun).",
+      "examples": [
+        {"word": "좋아요", "standard": "jo-a-yo", "actual": "jo-a-yo"},
+        {"word": "좋은", "standard": "jo-eun", "actual": "jo-eun"},
+        {"word": "많아요", "standard": "man-a-yo", "actual": "ma-na-yo"}
+      ]
+    },
+    {
+      "name": "ㅎ Weakening",
+      "description": "When ㅎ appears at the beginning of a word or syllable in casual speech, it may be weakened or dropped entirely. For example, '하루' (ha-ru) might be pronounced more like '아루' (a-ru).",
+      "examples": [
+        {"word": "하루", "standard": "ha-ru", "actual": "a-ru"},
+        {"word": "하얀", "standard": "ha-yan", "actual": "a-yan"},
+        {"word": "하늘", "standard": "ha-neul", "actual": "a-neul"}
+      ]
+    },
+    {
+      "name": "Palatalization",
+      "description": "When ㄷ (d) or ㅌ (t) precedes ㅣ (i) or ㅑ (ya), ㅕ (yeo), ㅛ (yo), or ㅠ (yu), they are palatalized and pronounced as ㅈ (j) or ㅊ (ch) respectively.",
+      "examples": [
+        {"word": "같이", "standard": "gat-i", "actual": "ga-chi"},
+        {"word": "굳이", "standard": "gud-i", "actual": "gu-ji"},
+        {"word": "맏이", "standard": "mad-i", "actual": "ma-ji"}
+      ]
+    },
+    {
+      "name": "Nasal Assimilation",
+      "description": "When ㄱ (g), ㄷ (d), or ㅂ (b) precede ㄴ (n) or ㅁ (m), they change to ㅇ (ng), ㄴ (n), or ㅁ (m) respectively.",
+      "examples": [
+        {"word": "학년", "standard": "hak-nyeon", "actual": "hang-nyeon"},
+        {"word": "밭머리", "standard": "bat-meo-ri", "actual": "ban-meo-ri"},
+        {"word": "십만", "standard": "sip-man", "actual": "sim-man"}
+      ]
+    },
+    {
+      "name": "Consonant Assimilation",
+      "description": "When certain consonants appear next to each other, one may change to match or become more similar to the other.",
+      "examples": [
+        {"word": "신라", "standard": "sin-ra", "actual": "sil-la"},
+        {"word": "관리", "standard": "gwan-ri", "actual": "gwal-li"},
+        {"word": "꽃길", "standard": "kkot-gil", "actual": "kkot-kil"}
+      ]
+    },
+    {
+      "name": "Final Consonant Reduction",
+      "description": "When a syllable ends with a consonant cluster, only one consonant is pronounced unless the next syllable begins with a vowel.",
+      "examples": [
+        {"word": "값이", "standard": "gaps-i", "actual": "gap-si"},
+        {"word": "넋이", "standard": "neoks-i", "actual": "neok-si"},
+        {"word": "앉다", "standard": "anc-da", "actual": "an-ta"}
+      ]
+    },
+    {
+      "name": "Tensification (Fortification)",
+      "description": "When certain consonants appear after a stopped consonant, they become tensed (fortified).",
+      "examples": [
+        {"word": "학교", "standard": "hak-gyo", "actual": "hak-kyo"},
+        {"word": "입구", "standard": "ip-gu", "actual": "ip-ku"},
+        {"word": "못 가", "standard": "mot ga", "actual": "mot ka"}
+      ]
+    },
+    {
+      "name": "Liaison",
+      "description": "When a syllable ends with a consonant and the next begins with a vowel, the final consonant is pronounced as the initial of the next syllable.",
+      "examples": [
+        {"word": "꽃이", "standard": "kkot-i", "actual": "kko-chi"},
+        {"word": "밥을", "standard": "bap-eul", "actual": "ba-beul"},
+        {"word": "책이", "standard": "chaek-i", "actual": "chae-gi"}
+      ]
+    }
+  ]
+}
