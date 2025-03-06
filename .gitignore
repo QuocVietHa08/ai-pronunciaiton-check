@@ -20,6 +20,9 @@ logs/
 # Google Cloud credentials
 *.json
 
+# Explicitly include package.json despite the above pattern
+!package.json
+
 # IDEs and editors
 .idea/
 .vscode/
