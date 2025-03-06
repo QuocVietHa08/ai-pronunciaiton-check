@@ -23,6 +23,8 @@ logs/
 # Explicitly include package.json despite the above pattern
 !package.json
 
+!data
+
 # IDEs and editors
 .idea/
 .vscode/
