@@ -25,6 +25,8 @@ logs/
 
 !data
 
+!tsconfig.json
+
 # IDEs and editors
 .idea/
 .vscode/
