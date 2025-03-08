@@ -41,16 +41,20 @@ const zodSchema = z.object({
  */
 export const analyzePronunciationAccuracy = async (
   transcription: string,
-  expectedText: string
+  expectedText: string | null
 ): Promise<AnalysisResult> => {
   try {
     // Search for relevant pronunciation rules
     const retriever = vectorStore.asRetriever();
     const relevantRules = await retriever.getRelevantDocuments(transcription);
 
-    // Create prompt for LLM
-    const promptTemplate = new PromptTemplate({
-      template: `You are a Korean language pronunciation expert. Analyze the pronunciation accuracy between the expected text and the transcribed text from audio.
+    // Create and format prompt based on whether expected text is provided
+    let prompt;
+    
+    if (expectedText) {
+      // Prompt for comparing expected text with transcription
+      const withExpectedTemplate = new PromptTemplate({
+        template: `You are a Korean language pronunciation expert. Analyze the pronunciation accuracy between the expected text and the transcribed text from audio.
 
 Expected text: {expectedText}
 Transcribed text: {transcription}
@@ -64,18 +68,46 @@ You MUST return your analysis in valid, parseable JSON format with the following
 {{
   "result": "Correct pronunciation" or "Incorrect pronunciation",
   "correct_pronunciation": "[Romanized correct pronunciation or null if correct]",
-  "feedback": "[Detailed explanation of pronunciation errors and applicable rules or null if correct]"
+  "feedback": "[Concise feedback in the format: 'original' → 'actual' (rule name) / 'word2' → 'actual2' (rule name), or null if correct]"
     }}
 
 Do not include any text outside of the JSON object. Ensure the JSON is properly formatted and can be parsed by JSON.parse().`,
-      inputVariables: ["expectedText", "transcription", "relevantRules"],
-    });
+        inputVariables: ["expectedText", "transcription", "relevantRules"],
+      });
+      
+      prompt = await withExpectedTemplate.format({
+        expectedText,
+        transcription,
+        relevantRules: relevantRules.map((doc) => doc.pageContent).join("\n\n"),
+      });
+    } else {
+      // Prompt for analyzing pronunciation without expected text
+      const withoutExpectedTemplate = new PromptTemplate({
+        template: `You are a Korean language pronunciation expert. Analyze the pronunciation of the transcribed text from audio.
 
-    const prompt = await promptTemplate.format({
-      expectedText,
-      transcription,
-      relevantRules: relevantRules.map((doc) => doc.pageContent).join("\n\n"),
-    });
+Transcribed text: {transcription}
+
+Relevant pronunciation rules:
+{relevantRules}
+
+Analyze the pronunciation quality of this Korean text. Identify any potential pronunciation issues based on standard Korean pronunciation rules.
+
+You MUST return your analysis in valid, parseable JSON format with the following structure:
+{{
+  "result": "Correct pronunciation" or "Incorrect pronunciation",
+  "correct_pronunciation": "[Romanized correct pronunciation or null if correct]",
+  "feedback": "[Concise feedback in the format: 'original' → 'actual' (rule name) / 'word2' → 'actual2' (rule name)]"
+    }}
+
+Do not include any text outside of the JSON object. Ensure the JSON is properly formatted and can be parsed by JSON.parse().`,
+        inputVariables: ["transcription", "relevantRules"],
+      });
+      
+      prompt = await withoutExpectedTemplate.format({
+        transcription,
+        relevantRules: relevantRules.map((doc) => doc.pageContent).join("\n\n"),
+      });
+    }
 
     const parser = StructuredOutputParser.fromZodSchema(zodSchema);
     // Get analysis from LLM

@@ -16,11 +16,7 @@ export const analyzePronunciation = async (req: Request, res: Response, next: Ne
       return;
     }
     
-    // Check if expected text is provided
-    if (!req.body.expected_text) {
-      res.status(400).json({ error: 'Expected text is required' });
-      return;
-    }
+    // expected_text is now optional
     
     // Get file details
     const { buffer, mimetype, originalname } = req.file;
@@ -36,7 +32,7 @@ export const analyzePronunciation = async (req: Request, res: Response, next: Ne
       return;
     }
     
-    const expectedText = req.body.expected_text;
+    const expectedText = req.body.expected_text || null;
     
     // Convert speech to text
     logger.info('Converting speech to text');
