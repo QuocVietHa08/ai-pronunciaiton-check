@@ -1,0 +1,94 @@
+{
+  "tensificationPatterns": [
+    {
+      "pattern": "만나서 반갑습니다",
+      "correct": "만나서 빤갑습니다",
+      "romanized": "Man-na-seo bban-gap-seum-ni-da",
+      "rule": "ᄇ Fortition (Tensification)"
+    },
+    {
+      "pattern": "반갑습니다",
+      "correct": "빤갑습니다",
+      "romanized": "Bban-gap-seum-ni-da",
+      "rule": "ᄇ Fortition (Tensification)"
+    },
+    {
+      "pattern": "잘 부탁드립니다",
+      "correct": "잘 뿌탁드립니다",
+      "romanized": "Jal bbu-tak-deu-rip-ni-da",
+      "rule": "ᄇ Fortition (Tensification)"
+    },
+    {
+      "pattern": "잘 보세요",
+      "correct": "잘 뽀세요",
+      "romanized": "Jal bbo-se-yo",
+      "rule": "ᄇ Fortition (Tensification)"
+    },
+    {
+      "pattern": "잘 가요",
+      "correct": "잘 까요",
+      "romanized": "Jal kka-yo",
+      "rule": "ᄀ Fortition (Tensification)"
+    },
+    {
+      "pattern": "잘 들어요",
+      "correct": "잘 뜰어요",
+      "romanized": "Jal tteu-leo-yo",
+      "rule": "ᄃ Fortition (Tensification)"
+    }
+  ],
+  "hLiaisonPatterns": [
+    {
+      "pattern": "좋은",
+      "correct": "조은",
+      "romanized": "Jo-eun",
+      "rule": "ᄒ Liaison"
+    },
+    {
+      "pattern": "좋아요",
+      "correct": "조아요",
+      "romanized": "Jo-a-yo",
+      "rule": "ᄒ Liaison"
+    },
+    {
+      "pattern": "많아요",
+      "correct": "마나요",
+      "romanized": "Ma-na-yo",
+      "rule": "ᄒ Liaison"
+    },
+    {
+      "pattern": "하루",
+      "correct": "아루",
+      "romanized": "A-ru",
+      "rule": "ᄒ Weakening"
+    },
+    {
+      "pattern": "하얀",
+      "correct": "아얀",
+      "romanized": "A-yan",
+      "rule": "ᄒ Weakening"
+    },
+    {
+      "pattern": "하늘",
+      "correct": "아늘",
+      "romanized": "A-neul",
+      "rule": "ᄒ Weakening"
+    },
+    {
+      "pattern": "좋은 하루",
+      "correct": "조은 아루",
+      "romanized": "Jo-eun a-ru",
+      "rule": "ᄒ Liaison and Weakening"
+    }
+  ],
+  "vowelConfusionPatterns": [
+    {
+      "pattern": "여보세요",
+      "correct": "여보세요",
+      "incorrect": "여보세여",
+      "romanized": "Yeo-bo-se-yo",
+      "rule": "ᅦ vs. ᅢ Vowel Confusion",
+      "explanation": "Some speakers pronounce \"여보세요\" as \"여보세여\""
+    }
+  ]
+}
