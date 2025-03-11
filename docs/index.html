@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korean Pronunciation Checker - Documentation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        :root {
+            --primary-color: #4e57d4;
+            --secondary-color: #f8f9fa;
+            --accent-color: #ff6b6b;
+            --text-color: #333;
+            --light-text: #6c757d;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            padding-top: 56px;
+        }
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: white !important;
+        }
+        .nav-link {
+            color: rgba(255,255,255,0.85) !important;
+        }
+        .nav-link:hover {
+            color: white !important;
+        }
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #7579e7 100%);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 2rem;
+        }
+        h1, h2, h3, h4 {
+            font-weight: 600;
+        }
+        .hero h1 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .section {
+            padding: 3rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        code {
+            background-color: #f8f9fa;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.2rem;
+            color: var(--accent-color);
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.3rem;
+            overflow-x: auto;
+        }
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+        }
+        .footer {
+            background-color: var(--secondary-color);
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        .table {
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        .highlight {
+            background-color: rgba(78, 87, 212, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .example-box {
+            background-color: #f8f9fa;
+            border-radius: 0.3rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .korean-text {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Korean Pronunciation Checker</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#introduction">Introduction</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#ai-model">AI Model</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pronunciation-rules">Pronunciation Rules</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#api-architecture">API Architecture</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#how-to-use">How to Use</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="container text-center">
+            <h1>Korean Pronunciation Checker</h1>
+            <p class="lead">An AI-powered system for identifying and correcting common Korean pronunciation mistakes</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Introduction Section -->
+        <section id="introduction" class="section">
+            <h2>Introduction</h2>
+            <p>
+                The Korean Pronunciation Checker is an advanced AI-powered system designed to help language learners identify and correct common pronunciation mistakes in Korean. The system focuses on specific pronunciation patterns that are often challenging for non-native speakers, such as tensification, ᄒ (h) liaison/weakening, and vowel confusion.
+            </p>
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-header">Accurate Analysis</div>
+                        <div class="card-body">
+                            <p>Leverages state-of-the-art AI models to analyze pronunciation with high accuracy</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-header">Specific Feedback</div>
+                        <div class="card-body">
+                            <p>Provides detailed, actionable feedback on pronunciation errors with correct examples</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-header">Rule-Based System</div>
+                        <div class="card-body">
+                            <p>Incorporates linguistic rules specific to Korean pronunciation for better results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Model Section -->
+        <section id="ai-model" class="section">
+            <h2>AI Model and Implementation</h2>
+            <p>
+                Our system uses a Large Language Model (LLM) to analyze Korean pronunciation, combined with a specialized pattern recognition system for handling common pronunciation patterns.
+            </p>
+            
+            <h3 class="mt-4">LLM Integration</h3>
+            <div class="highlight">
+                <p>We use OpenAI's models (specifically GPT-4) for their advanced understanding of language patterns and pronunciation rules.</p>
+            </div>
+            
+            <h4>Prompt Engineering</h4>
+            <p>
+                We've carefully designed prompts that instruct the AI to analyze Korean pronunciation based on:
+            </p>
+            <ul>
+                <li>The original Korean text</li>
+                <li>The user's pronunciation attempt (transcription)</li>
+                <li>Specific Korean pronunciation rules</li>
+            </ul>
+            
+            <h4>Response Parsing</h4>
+            <p>
+                The AI returns a structured JSON response containing:
+            </p>
+            <ul>
+                <li>Overall assessment (correct/incorrect)</li>
+                <li>Correct pronunciation (in romanized form)</li>
+                <li>Detailed feedback explaining any errors</li>
+            </ul>
+            
+            <h3 class="mt-4">Pattern Recognition System</h3>
+            <p>
+                Beyond the general LLM capabilities, we've implemented a specialized pattern recognition system:
+            </p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Pattern Database</h5>
+                            <p class="card-text">We maintain a JSON database of common pronunciation patterns categorized by rule type.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Pattern Matching</h5>
+                            <p class="card-text">Before sending a request to the LLM, we check if the text contains any special patterns.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Rule-Based Overrides</h5>
+                            <p class="card-text">For known patterns, we can override the LLM's response with more precise feedback.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pronunciation Rules Section -->
+        <section id="pronunciation-rules" class="section">
+            <h2>Application of Korean Pronunciation Rules</h2>
+            <p>
+                Our system focuses on three main categories of Korean pronunciation rules that are often challenging for language learners:
+            </p>
+            
+            <div class="card mb-4 mt-4">
+                <div class="card-header">
+                    <h3 class="mb-0">1. Tensification (Fortition)</h3>
+                </div>
+                <div class="card-body">
+                    <p>
+                        In Korean, certain consonants become tensified (stronger) in specific contexts, especially after another consonant.
+                    </p>
+                    <div class="example-box">
+                        <h5>Example:</h5>
+                        <ul>
+                            <li><strong>Pattern:</strong> <span class="korean-text">반갑습니다</span> (Nice to meet you)</li>
+                            <li><strong>Correct:</strong> <span class="korean-text">빤갑습니다</span> (with tensified ᄇ/b → ᄈ/bb)</li>
+                            <li><strong>Romanized:</strong> "Bban-gap-seum-ni-da"</li>
+                        </ul>
+                    </div>
+                    <p>The system recognizes when a user fails to apply tensification and provides specific feedback on how to correct it.</p>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="mb-0">2. ᄒ (h) Liaison and Weakening</h3>
+                </div>
+                <div class="card-body">
+                    <p>
+                        The Korean consonant ᄒ (h) often undergoes changes in natural speech:
+                    </p>
+                    <h5>ᄒ Liaison:</h5>
+                    <p>When ᄒ appears between vowels or after certain consonants, it may be weakened or dropped.</p>
+                    <div class="example-box">
+                        <h5>Example:</h5>
+                        <ul>
+                            <li><strong>Pattern:</strong> <span class="korean-text">좋은</span> (good)</li>
+                            <li><strong>Correct:</strong> <span class="korean-text">조은</span> (the ᄒ is dropped)</li>
+                            <li><strong>Romanized:</strong> "Jo-eun"</li>
+                        </ul>
+                    </div>
+                    
+                    <h5 class="mt-3">ᄒ Weakening:</h5>
+                    <p>In certain positions, especially at the beginning of non-initial syllables, ᄒ may be weakened or dropped.</p>
+                    <div class="example-box">
+                        <h5>Example:</h5>
+                        <ul>
+                            <li><strong>Pattern:</strong> <span class="korean-text">하루</span> (day)</li>
+                            <li><strong>Correct:</strong> <span class="korean-text">아루</span> (with weakened ᄒ)</li>
+                            <li><strong>Romanized:</strong> "A-ru"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3 class="mb-0">3. Vowel Confusion</h3>
+                </div>
+                <div class="card-body">
+                    <p>
+                        Certain Korean vowels sound similar to non-native speakers and are often confused.
+                    </p>
+                    <div class="example-box">
+                        <h5>Example:</h5>
+                        <ul>
+                            <li><strong>Pattern:</strong> <span class="korean-text">여보세요</span> (hello, when answering the phone)</li>
+                            <li><strong>Common incorrect pronunciation:</strong> <span class="korean-text">여보세여</span></li>
+                            <li><strong>Correct:</strong> <span class="korean-text">여보세요</span> (with the correct vowel ᅭ/yo at the end, not ᅨ/yeo)</li>
+                            <li><strong>Romanized:</strong> "Yeo-bo-se-yo"</li>
+                        </ul>
+                    </div>
+                    <p>The system identifies these vowel confusion patterns and provides targeted feedback.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- API Architecture Section -->
+        <section id="api-architecture" class="section">
+            <h2>API Architecture Overview</h2>
+            <p>
+                Our system follows a modern, modular architecture designed for flexibility and performance.
+            </p>
+            
+            <h3 class="mt-4">Core Components</h3>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Analysis Service</h5>
+                            <p class="card-text">The central component that coordinates the pronunciation analysis process.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">LLM Service</h5>
+                            <p class="card-text">Handles communication with the OpenAI API.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Data Repository</h5>
+                            <p class="card-text">Stores pronunciation patterns and rules in JSON format.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 class="mt-4">Request Flow</h3>
+            <div class="table-responsive mt-3">
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Step</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1. Client Request</td>
+                            <td>The client sends a request with the original Korean text and the user's pronunciation attempt.</td>
+                        </tr>
+                        <tr>
+                            <td>2. Pattern Detection</td>
+                            <td>The system first checks if the text contains any special pronunciation patterns from our database.</td>
+                        </tr>
+                        <tr>
+                            <td>3. LLM Analysis</td>
+                            <td>If no specific pattern is found (or as a supplement), the system sends the text to the LLM for analysis.</td>
+                        </tr>
+                        <tr>
+                            <td>4. Response Generation</td>
+                            <td>The system combines pattern-based and LLM-based analysis to generate a comprehensive response.</td>
+                        </tr>
+                        <tr>
+                            <td>5. Client Response</td>
+                            <td>The client receives a structured JSON response with the assessment and feedback.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3 class="mt-4">Data Management</h3>
+            <p>
+                <strong>Pattern Database:</strong> Stored in <code>korean_pronunciation_patterns.json</code>, this file contains categorized patterns for different pronunciation rules.
+            </p>
+            <p>
+                <strong>Dynamic Updates:</strong> The system is designed to allow easy addition of new pronunciation patterns without changing the core code.
+            </p>
+        </section>
+
+        <!-- How to Use Section -->
+        <section id="how-to-use" class="section">
+            <h2>How to Use the System</h2>
+            
+            <h3 class="mt-4">API Endpoint</h3>
+            <p>The system exposes a simple REST API endpoint:</p>
+            <pre><code>POST /api/analyze-pronunciation</code></pre>
+            
+            <h3 class="mt-4">Request Format</h3>
+            <pre><code>{
+  "originalText": "여보세요",
+  "transcription": "여보세여"
+}</code></pre>
+            
+            <h3 class="mt-4">Response Format</h3>
+            <pre><code>{
+  "result": "Incorrect pronunciation",
+  "correct_pronunciation": "Yeo-bo-se-yo",
+  "feedback": "ᅦ vs. ᅢ Vowel Confusion\nSome speakers pronounce \"여보세요\" as \"여보세여\"\nCorrect Pronunciation: Yeo-bo-se-yo."
+}</code></pre>
+            
+            <h3 class="mt-4">Interpretation</h3>
+            <ul>
+                <li><strong>result:</strong> Overall assessment ("Correct pronunciation" or "Incorrect pronunciation")</li>
+                <li><strong>correct_pronunciation:</strong> The romanized correct pronunciation</li>
+                <li><strong>feedback:</strong> Detailed explanation of any errors and how to correct them</li>
+            </ul>
+            
+            <div class="highlight mt-4">
+                <h4>Example Use Case</h4>
+                <p>A language learning app could integrate this API to provide real-time feedback on user pronunciation. When a user practices saying "여보세요" (hello) but pronounces it as "여보세여", the system would identify the vowel confusion and provide specific guidance on the correct pronunciation.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <p>Korean Pronunciation Checker - AI-Powered Pronunciation Analysis</p>
+            <p class="text-muted">© 2025 - All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
