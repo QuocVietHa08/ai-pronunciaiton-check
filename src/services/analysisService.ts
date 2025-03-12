@@ -145,6 +145,79 @@ const checkForPronunciationPatterns = (
   return { patternType: "", found: false, matchingPatterns: [] };
 };
 
+const overridePattern = (patternCheck: {
+  patternType: string;
+  found: boolean;
+  matchingPatterns: PronunciationPattern[];
+}, transcription: string) => {
+  if (patternCheck.patternType === "tensification") {
+    // Use the matched tensification patterns from the pattern check
+    const matchedPattern = patternCheck.matchingPatterns[0];
+
+    if (matchedPattern) {
+      logger.info(
+        "Overriding LLM result with specific tensification pattern"
+      );
+      return {
+        result: "Incorrect pronunciation",
+        correct_pronunciation: matchedPattern.romanized || "",
+        feedback: `${matchedPattern.rule || "Tensification"}\n"${
+          matchedPattern.pattern
+        }" → "${matchedPattern.correct}"`,
+      };
+    }
+  } else if (patternCheck.patternType === "h_liaison") {
+    // Special case for a common phrase
+    if (
+      transcription.includes("좋은 하루") ||
+      transcription.includes("좋은하루")
+    ) {
+      logger.info(
+        "Overriding LLM result with specific ᄒ liaison and weakening pattern"
+      );
+      return {
+        result: "Incorrect pronunciation",
+        correct_pronunciation: "Jo-eun a-ru bo-nae-se-yo",
+        feedback: `ᄒ Liaison/Weakening\n"좋은 하루" → "조은 아루"`
+      };
+    }
+
+    const matchedPattern = patternCheck.matchingPatterns[0];
+
+    if (matchedPattern) {
+      logger.info(
+        "Overriding LLM result with specific ᄒ liaison/weakening pattern"
+      );
+      return {
+        result: "Incorrect pronunciation",
+        correct_pronunciation: matchedPattern.romanized || null,
+        feedback: `${matchedPattern.rule || "ᄒ Liaison/Weakening"}\n"${
+          matchedPattern.pattern
+        }" → "${matchedPattern.correct}"${matchedPattern.romanized ? ` (${matchedPattern.romanized})` : ""}`
+      };
+    }
+  } else if (patternCheck.patternType === "vowel_confusion") {
+    // Use the matched vowel confusion patterns from the pattern check
+    const matchedPattern = patternCheck.matchingPatterns[0];
+
+    if (matchedPattern) {
+      logger.info(
+        "Overriding LLM result with specific vowel confusion pattern"
+      );
+      return {
+        result: "Incorrect pronunciation",
+        correct_pronunciation: matchedPattern.romanized || null,
+        feedback: `${matchedPattern.rule || "Vowel Confusion"}\n${
+          matchedPattern.explanation ||
+          `"${matchedPattern.incorrect || matchedPattern.pattern}" → "${
+            matchedPattern.correct
+          }"`
+        }`,
+      };
+    }
+  }
+};
+
 /**
  * Analyze pronunciation accuracy using AI
  */
@@ -234,70 +307,9 @@ ${examples}`;
 
       // Override for specific pronunciation patterns
       if (patternCheck.found) {
-        if (patternCheck.patternType === "tensification") {
-          // Use the matched tensification patterns from the pattern check
-          const matchedPattern = patternCheck.matchingPatterns[0];
-
-          if (matchedPattern) {
-            logger.info(
-              "Overriding LLM result with specific tensification pattern"
-            );
-            return {
-              result: "Incorrect pronunciation",
-              correct_pronunciation: matchedPattern.romanized || "",
-              feedback: `${matchedPattern.rule || "Tensification"}\n"${
-                matchedPattern.pattern
-              }" → "${matchedPattern.correct}"`,
-            };
-          }
-        } else if (patternCheck.patternType === "h_liaison") {
-          if (
-            transcription.includes("좋은 하루") ||
-            transcription.includes("좋은하루")
-          ) {
-            logger.info(
-              "Overriding LLM result with specific ᄒ liaison and weakening pattern"
-            );
-            return {
-              result: "Incorrect pronunciation",
-              correct_pronunciation: "Jo-eun a-ru bo-nae-se-yo",
-              feedback: `좋은' → '조은' (ᄒ liaison) / '하루' → '아루' (ᄒ weakening)`
-            };
-          }
-
-          const matchedPattern = patternCheck.matchingPatterns[0];
-
-          if (matchedPattern) {
-            logger.info(
-              "Overriding LLM result with specific ᄒ liaison/weakening pattern"
-            );
-            return {
-              result: "Incorrect pronunciation",
-              correct_pronunciation: matchedPattern.romanized || null,
-              feedback: `${matchedPattern.rule || "ᄒ Liaison/Weakening"}\n${
-                matchedPattern.explanation || ""
-              }\nCorrect Pronunciation: ${matchedPattern.romanized || ""}.`,
-            };
-          }
-        } else if (patternCheck.patternType === "vowel_confusion") {
-          // Use the matched vowel confusion patterns from the pattern check
-          const matchedPattern = patternCheck.matchingPatterns[0];
-
-          if (matchedPattern) {
-            logger.info(
-              "Overriding LLM result with specific vowel confusion pattern"
-            );
-            return {
-              result: "Incorrect pronunciation",
-              correct_pronunciation: matchedPattern.romanized || null,
-              feedback: `${matchedPattern.rule || "Vowel Confusion"}\n${
-                matchedPattern.explanation ||
-                `"${matchedPattern.incorrect || matchedPattern.pattern}" → "${
-                  matchedPattern.correct
-                }"`
-              }`,
-            };
-          }
+        const override = overridePattern(patternCheck, transcription);
+        if (override) {
+          return override;
         }
       }
 
