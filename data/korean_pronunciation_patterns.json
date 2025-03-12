@@ -4,37 +4,37 @@
       "pattern": "만나서 반갑습니다",
       "correct": "만나서 빤갑습니다",
       "romanized": "Man-na-seo bban-gap-seum-ni-da",
-      "rule": "ᄇ Fortition (Tensification)"
+      "rule": "ᄇ Fortition"
     },
     {
       "pattern": "반갑습니다",
       "correct": "빤갑습니다",
       "romanized": "Bban-gap-seum-ni-da",
-      "rule": "ᄇ Fortition (Tensification)"
+      "rule": "ᄇ Fortition"
     },
     {
       "pattern": "잘 부탁드립니다",
       "correct": "잘 뿌탁드립니다",
       "romanized": "Jal bbu-tak-deu-rip-ni-da",
-      "rule": "ᄇ Fortition (Tensification)"
+      "rule": "ᄇ Fortition"
     },
     {
       "pattern": "잘 보세요",
       "correct": "잘 뽀세요",
       "romanized": "Jal bbo-se-yo",
-      "rule": "ᄇ Fortition (Tensification)"
+      "rule": "ᄇ Fortition"
     },
     {
       "pattern": "잘 가요",
       "correct": "잘 까요",
       "romanized": "Jal kka-yo",
-      "rule": "ᄀ Fortition (Tensification)"
+      "rule": "ᄀ Fortition"
     },
     {
       "pattern": "잘 들어요",
       "correct": "잘 뜰어요",
       "romanized": "Jal tteu-leo-yo",
-      "rule": "ᄃ Fortition (Tensification)"
+      "rule": "ᄃ Fortition"
     }
   ],
   "hLiaisonPatterns": [

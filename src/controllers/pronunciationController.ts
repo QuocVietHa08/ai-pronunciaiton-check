@@ -25,19 +25,14 @@ export const analyzePronunciation = async (
   try {
     logger.info("Received pronunciation analysis request");
 
-    // Check if file is provided
     if (!req.file) {
       res.status(400).json({ error: "No audio file provided" });
       return;
     }
 
-    // expected_text is now optional
-
-    // Get file details
     const { buffer, mimetype, originalname } = req.file;
     logger.info(`Received file: ${originalname}, type: ${mimetype}`);
 
-    // Check if the file format is supported by OpenAI
     const fileExtension = originalname.split(".").pop()?.toLowerCase();
     if (!fileExtension || !SUPPORTED_FORMATS.includes(fileExtension)) {
       logger.warn(`Unsupported file format: ${fileExtension}`);
@@ -49,18 +44,13 @@ export const analyzePronunciation = async (
       return;
     }
 
-    // Convert speech to text
-    logger.info("Converting speech to text -------> c");
     const { transcription, words } = await speechToText(buffer, fileExtension);
-    logger.info(`Transcribed text: ${transcription} ${words}`)
 
-    // Analyze pronunciation
     logger.info(
       `Analyzing pronunciation accuracy for transcribed text: ${transcription}`
     );
     const analysisResult = await analyzePronunciationAccuracy(transcription);
 
-    // Format response
     let response;
     if (analysisResult.result === "Correct pronunciation") {
       response = {
